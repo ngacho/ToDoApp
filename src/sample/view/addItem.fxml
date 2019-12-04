@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2c2c2c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemController">
+   <children>
+      <AnchorPane prefHeight="92.0" prefWidth="700.0" style="-fx-background-color: #000;">
+         <children>
+            <Label alignment="CENTER" layoutX="276.0" layoutY="25.0" prefHeight="33.0" prefWidth="149.0" text="TO DO" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" layoutX="220.0" layoutY="208.0" prefHeight="35.0" prefWidth="261.0" text="No Tasks for Today, yet!" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="additem_addtask_image" fitHeight="53.0" fitWidth="60.0" layoutX="324.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/ic_addTasks.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
