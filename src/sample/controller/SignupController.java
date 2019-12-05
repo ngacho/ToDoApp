@@ -50,16 +50,6 @@ public class SignupController {
 
     @FXML
     void initialize(){
-        String gender = "";
-        String firstNameText = signup_firstname.getText();
-        String lastNameText = signup_lastname.getText();
-        String userNameText = signup_username.getText();
-        String passwordText = signup_password.getText();
-        if(signup_female_checkbox.isSelected()){
-            gender = "female";
-        }else if(signup_male_checkbox.isSelected()) {
-            gender = "male";
-        }
 
         signup_loginbutton.setOnAction(actionEvent -> {
             //Take users to log in screen
@@ -82,11 +72,23 @@ public class SignupController {
         });
 
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        String genderText = gender;
         signup_signupbutton.setOnAction(actionEvent -> {
+            //Getting text from input fields.
+            String gender = "";
+            String firstNameText = signup_firstname.getText().trim();
+            String lastNameText = signup_lastname.getText().trim();
+            String userNameText = signup_username.getText().trim();
+            String passwordText = signup_password.getText().trim();
+            if(signup_female_checkbox.isSelected()){
+                gender = "female";
+            }else if(signup_male_checkbox.isSelected()) {
+                gender = "male";
+            }
+            String genderText = gender;
+            System.out.println("Boop Beep: Sign up button clicked");
             try {
                 databaseHandler.signUpUser(firstNameText, lastNameText, userNameText, passwordText, genderText);
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
