@@ -23,8 +23,6 @@ public class AddItemController {
     @FXML
     private AnchorPane rootanchorpane_inaddItem;
 
-    @FXML
-    private AnchorPane anchorpane_addItem;
 
     @FXML
     private Label noTaskLabel_inaddItem;
@@ -53,14 +51,12 @@ public class AddItemController {
         addTask_inaddItem.relocate(0, 0);
         noTaskLabel_inaddItem.relocate(0, 10);
 
-
         //Add Transition to add button
         addTaskImageTransition.setFromValue(1f);
         addTaskImageTransition.setToValue(0f);
         addTaskImageTransition.setCycleCount(1);
         addTaskImageTransition.setAutoReverse(false);
         addTaskImageTransition.play();
-
         //Add Transition to no-task-label
         noTaskLabelTransition.setFromValue(1f);
         noTaskLabelTransition.setToValue(0f);
@@ -68,13 +64,25 @@ public class AddItemController {
         noTaskLabelTransition.setAutoReverse(false);
         noTaskLabelTransition.play();
 
-       try {
-            AnchorPane addItemsForm = FXMLLoader.load(getClass().getResource("/sample/view/addItemForm.fxml"));
-            anchorpane_addItem.getChildren().setAll(addItemsForm);
+        showTaskAdditionForm();
+
+    }
+
+    private void showTaskAdditionForm() {
+        try {
+            AnchorPane addTasksForm = FXMLLoader
+                    .load(getClass().getResource("/sample/view/addItemForm.fxml"));
+
+            FadeTransition taskAdditionFormTransition = new FadeTransition(Duration.millis(1000), addTasksForm);
+            taskAdditionFormTransition.setFromValue(0f);
+            taskAdditionFormTransition.setToValue(1f);
+            taskAdditionFormTransition.setCycleCount(1);
+            taskAdditionFormTransition.setAutoReverse(false);
+            taskAdditionFormTransition.play();
+            rootanchorpane_inaddItem.getChildren().setAll(addTasksForm);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 

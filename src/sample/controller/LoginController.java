@@ -40,11 +40,13 @@ public class LoginController {
     @FXML
     void initialize() {
         btn_login_signup.setOnAction(actionEvent -> openSignUpWindow());
-        btn_login_login.setOnAction(actionEvent -> logInUser());
+        btn_login_login.setOnAction(actionEvent -> {
+            logInUser();
+        });
 
     }
 
-    private void logInUser(){
+    private void logInUser() {
         String logInUserName = txtfield_login_username.getText().trim();
         String logInPassword = passfield_login_password.getText().trim();
         User user = new User(logInUserName, logInPassword);
