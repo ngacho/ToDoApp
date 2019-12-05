@@ -1,13 +1,12 @@
 package sample.controller;
 
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
+import sample.animations.Fader;
 import sample.animations.Shaker;
 
 import java.net.URL;
@@ -44,25 +43,15 @@ public class AddItemController {
     }
 
     private void makeItemsFade() {
-        FadeTransition addTaskImageTransition = new FadeTransition(Duration.millis(1000), addTask_inaddItem);
-        FadeTransition noTaskLabelTransition = new FadeTransition(Duration.millis(1000), noTaskLabel_inaddItem);
-
         //Relocate Items to corner
         addTask_inaddItem.relocate(0, 0);
         noTaskLabel_inaddItem.relocate(0, 10);
-
         //Add Transition to add button
-        addTaskImageTransition.setFromValue(1f);
-        addTaskImageTransition.setToValue(0f);
-        addTaskImageTransition.setCycleCount(1);
-        addTaskImageTransition.setAutoReverse(false);
-        addTaskImageTransition.play();
+        Fader fadeAddTaskButton = new Fader();
+        fadeAddTaskButton.disappearFadeOut(addTask_inaddItem);
         //Add Transition to no-task-label
-        noTaskLabelTransition.setFromValue(1f);
-        noTaskLabelTransition.setToValue(0f);
-        noTaskLabelTransition.setCycleCount(1);
-        noTaskLabelTransition.setAutoReverse(false);
-        noTaskLabelTransition.play();
+        Fader fadeNoTaskLabel =  new Fader();
+        fadeNoTaskLabel.disappearFadeOut(noTaskLabel_inaddItem);
 
         showTaskAdditionForm();
 
@@ -73,12 +62,9 @@ public class AddItemController {
             AnchorPane addTasksForm = FXMLLoader
                     .load(getClass().getResource("/sample/view/addItemForm.fxml"));
 
-            FadeTransition taskAdditionFormTransition = new FadeTransition(Duration.millis(1000), addTasksForm);
-            taskAdditionFormTransition.setFromValue(0f);
-            taskAdditionFormTransition.setToValue(1f);
-            taskAdditionFormTransition.setCycleCount(1);
-            taskAdditionFormTransition.setAutoReverse(false);
-            taskAdditionFormTransition.play();
+            Fader fadeTaskAdditionForm = new Fader();
+            fadeTaskAdditionForm.appearFadeIn(addTasksForm);
+
             rootanchorpane_inaddItem.getChildren().setAll(addTasksForm);
         } catch (Exception e) {
             e.printStackTrace();
