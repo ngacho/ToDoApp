@@ -2,10 +2,8 @@ package sample.database;
 
 import sample.models.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.xml.transform.Result;
+import java.sql.*;
 
 public class DatabaseHandler extends Configs{
     Connection dbConnection;
@@ -42,5 +40,33 @@ public class DatabaseHandler extends Configs{
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultSet getUser(User user){
+        ResultSet resultSet = null;
+        if (!user.getUserName().equals("") || !user.getLastName().equals("")) {
+            //select all from users table where username="username" and password ="password"
+            String query = "SELECT * FROM "
+                    + Const.USERS_TABLE
+                    + " WHERE "
+                    + Const.USERS_USERNAME
+                    + "=?" + " AND "
+                    + Const.USERS_PASSWORD
+                    + "=?";
+            try {
+                PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+                preparedStatement.setString(1, user.getUserName());
+                preparedStatement.setString(2, user.getPassword());
+
+                resultSet = preparedStatement.executeQuery();
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+
+        }
+
+        return resultSet;
     }
 }

@@ -24,7 +24,7 @@
       </Label>
       <ImageView fx:id="additem_addtask_image" fitHeight="53.0" fitWidth="60.0" layoutX="324.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/ic_addTasks.png" />
+            <Image url="@../assets/ic_addtasks.png" />
          </image>
       </ImageView>
    </children>

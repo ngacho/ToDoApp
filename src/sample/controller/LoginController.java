@@ -8,9 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sample.database.DatabaseHandler;
+import sample.models.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController {
@@ -34,40 +38,66 @@ public class LoginController {
 
     @FXML
     void initialize() {
-        String loginUsername = txtfield_login_username.getText().trim();
-        String loginPassword = passfield_login_password.getText().trim();
-
-        btn_login_signup.setOnAction(actionEvent -> {
-            //take users to sign up screen
-            btn_login_signup.getScene().getWindow().hide();//use the sign up button to get the active window then hide the active window to show sign up activity
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/view/signup.fxml"));
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.showAndWait();
-
-        });
-        btn_login_login.setOnAction(actionEvent -> {
-            if (!loginUsername.equals("") || !loginPassword.equals("")){
-                loginUser(loginUsername, loginPassword);
-            }else{
-                System.out.println("Error in logging in user");
-            }
-
-        });
+        btn_login_signup.setOnAction(actionEvent -> openSignUpWindow());
+        btn_login_login.setOnAction(actionEvent -> logInUser());
 
     }
 
-    private void loginUser(String username, String Password) {
-        //check if user exists in database.
+    private void logInUser(){
+        String logInUserName = txtfield_login_username.getText().trim();
+        String logInPassword = passfield_login_password.getText().trim();
+        User user = new User(logInUserName, logInPassword);
 
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        ResultSet userRow = databaseHandler.getUser(user);
+        try {
+            int counter = 0;
+            while (userRow.next()){
+                counter++;
+            }
+
+            if(counter == 1){
+                System.out.println("Log In successful!");
+                showAddTasksWindow();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }}
+
+    private void openSignUpWindow() {
+        //take users to sign up screen
+        btn_login_signup.getScene().getWindow().hide();//use the sign up button to get the active window then hide the active window to show sign up activity
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/view/signup.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.showAndWait();
     }
+
+    private void showAddTasksWindow(){
+        //take users to sign up screen
+        btn_login_login.getScene().getWindow().hide();//use the sign up button to get the active window then hide the active window to show sign up activity
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/view/addItem.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.showAndWait();
+    }
+
 }
