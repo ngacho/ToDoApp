@@ -6,26 +6,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2c2c2c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemController">
+<AnchorPane fx:id="rootanchorpane_inaddItem" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemController">
    <children>
-      <AnchorPane prefHeight="92.0" prefWidth="700.0" style="-fx-background-color: #000;">
+      <AnchorPane fx:id="anchorpane_addItem" layoutY="92.0" prefHeight="308.0" prefWidth="700.0" style="-fx-background-color: #2c2c2c;">
          <children>
-            <Label alignment="CENTER" layoutX="276.0" layoutY="25.0" prefHeight="33.0" prefWidth="149.0" text="TO DO" textFill="WHITE">
+            <Label fx:id="noTaskLabel_inaddItem" alignment="CENTER" layoutX="179.0" layoutY="67.0" prefHeight="41.0" prefWidth="343.0" text="No Tasks for Today, Yet!" textFill="WHITE">
                <font>
-                  <Font size="36.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
+            <ImageView fx:id="addTask_inaddItem" fitHeight="41.0" fitWidth="43.0" layoutX="329.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/ic_addtasks.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <Label alignment="CENTER" layoutX="220.0" layoutY="208.0" prefHeight="35.0" prefWidth="261.0" text="No Tasks for Today, yet!" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="278.0" layoutY="20.0" prefHeight="36.0" prefWidth="144.0" text="TO DO" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="additem_addtask_image" fitHeight="53.0" fitWidth="60.0" layoutX="324.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/ic_addtasks.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
