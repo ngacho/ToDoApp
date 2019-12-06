@@ -1,24 +1,45 @@
 package sample.models;
 
+import java.sql.Timestamp;
+
 public class Task {
-    private long dateCreated;
+
+    private int userId;
+    private Timestamp dateCreated;
     private String task;
     private String description;
 
-    public Task(long dateCreated, String task, String description) {
+
+    public Task() {
+    }
+
+    public Task( Timestamp dateCreated, String task, String description) {
         this.dateCreated = dateCreated;
         this.task = task;
         this.description = description;
     }
 
-    public Task() {
+
+    public Task(int userId, Timestamp dateCreated, String task, String description) {
+        this.userId = userId;
+        this.dateCreated = dateCreated;
+        this.task = task;
+        this.description = description;
     }
 
-    public long getDateCreated() {
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Timestamp getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(long dateCreated) {
+    public void setDateCreated(Timestamp dateCreated) {
         this.dateCreated = dateCreated;
     }
 

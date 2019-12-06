@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController {
+    private int userId;
     @FXML
     private ResourceBundle resources;
 
@@ -61,6 +62,8 @@ public class LoginController {
         try {
             int counter = 0;
             while (userRow.next()){
+                userId = userRow.getInt("userid");
+                System.out.println(userId);
                 counter++;
             }
 
@@ -94,17 +97,29 @@ public class LoginController {
 
     private void showAddTasksWindow(){
         //take users to sign up screen
+        btn_login_login.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/view/addItem.fxml"));
+
         try {
-            AnchorPane showAddTaskwindow = FXMLLoader
-                    .load(getClass().getResource("/sample/view/addItem.fxml"));
-
-            Fader fadeTaskAdditionForm = new Fader();
-            fadeTaskAdditionForm.appearFadeIn(showAddTaskwindow);
-
-            rootanchorpane_inlogin.getChildren().setAll(showAddTaskwindow);
+            loader.setRoot(loader.getRoot());
+            loader.load();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+
+        AddItemController addItemController = loader.getController();
+        addItemController.setUserId(userId);
+
+
+        stage.showAndWait();
+
+
+
     }
 
 }

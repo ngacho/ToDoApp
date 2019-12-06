@@ -1,9 +1,12 @@
 package sample.database;
 
+import sample.controller.AddItemController;
+import sample.models.Task;
 import sample.models.User;
 
 import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.concurrent.CompletionService;
 
 public class DatabaseHandler extends Configs{
     Connection dbConnection;
@@ -68,5 +71,43 @@ public class DatabaseHandler extends Configs{
         }
 
         return resultSet;
+    }
+
+    public void insertTask(Task task){
+        String query = "INSERT INTO "+Const.TASKS_TABLE+"("+Const.TASKS_USERID+","+Const.TASKS_DATECREATED
+                +","+Const.TASKS_DESCRIPTION+","+Const.TASKS_TASK+")"
+                +"VALUES(?,?,?,?)";
+
+        try{
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+
+            preparedStatement.setInt(1, task.getUserId());
+            preparedStatement.setTimestamp(2, task.getDateCreated());
+            preparedStatement.setString(3, task.getDescription());
+            preparedStatement.setString(4, task.getTask());
+
+            preparedStatement.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /*String insert = "INSERT INTO "+Const.TASKS_TABLE+"(" +Const.TASKS_DATECREATED +","+Const.TASKS_DESCRIPTION+","
+                +Const.TASKS_TASK+")"
+                +"VALUES(?,?,?)";*/
+/*
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+
+//            preparedStatement.setInt(1, AddItemController.userId);
+            preparedStatement.setTimestamp(1, task.getDateCreated());
+            preparedStatement.setString(2, task.getDescription());
+            preparedStatement.setString(3, task.getTask());
+
+            preparedStatement.executeUpdate();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }*/
+
     }
 }

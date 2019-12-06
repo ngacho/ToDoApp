@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Affine;
 import sample.animations.Fader;
 import sample.animations.Shaker;
 
@@ -13,6 +14,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddItemController {
+
+    public static int userId;
+
     @FXML
     private ResourceBundle resources;
 
@@ -62,6 +66,8 @@ public class AddItemController {
             AnchorPane addTasksForm = FXMLLoader
                     .load(getClass().getResource("/sample/view/addItemForm.fxml"));
 
+            AddItemController.userId = getUserId();
+
             Fader fadeTaskAdditionForm = new Fader();
             fadeTaskAdditionForm.appearFadeIn(addTasksForm);
 
@@ -71,5 +77,15 @@ public class AddItemController {
         }
 
     }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+
+        this.userId = userId;
+    }
+
 
 }
