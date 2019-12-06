@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sample.animations.Fader;
 import sample.database.DatabaseHandler;
 import sample.models.User;
 
@@ -22,6 +24,10 @@ public class SignupController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private AnchorPane rootanchorpane_insignup;
+
 
     @FXML
     private Button signup_loginbutton;
@@ -58,22 +64,17 @@ public class SignupController {
 
     private void openLogInWindow() {
         //Take users to log in screen
-        signup_loginbutton.getScene().getWindow().hide();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/view/login.fxml"));
-
         try {
-            loader.load();
-        } catch (IOException e) {
+            AnchorPane showLogInWindow = FXMLLoader
+                    .load(getClass().getResource("/sample/view/login.fxml"));
+
+            Fader fadeTaskAdditionForm = new Fader();
+            fadeTaskAdditionForm.appearFadeIn(showLogInWindow);
+
+            rootanchorpane_insignup.getChildren().setAll(showLogInWindow);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.showAndWait();
     }
 
     private void createUser() {

@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sample.animations.Fader;
 import sample.animations.Shaker;
 import sample.database.DatabaseHandler;
 import sample.models.User;
@@ -24,6 +26,9 @@ public class LoginController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private AnchorPane rootanchorpane_inlogin;
 
     @FXML
     private TextField txtfield_login_username;
@@ -74,38 +79,32 @@ public class LoginController {
 
     private void openSignUpWindow() {
         //take users to sign up screen
-        btn_login_signup.getScene().getWindow().hide();//use the sign up button to get the active window then hide the active window to show sign up activity
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/view/signup.fxml"));
         try {
-            loader.load();
-        } catch (IOException e) {
+            AnchorPane showSignUpWindow = FXMLLoader
+                    .load(getClass().getResource("/sample/view/signup.fxml"));
+
+            Fader fadeTaskAdditionForm = new Fader();
+            fadeTaskAdditionForm.appearFadeIn(showSignUpWindow);
+
+            rootanchorpane_inlogin.getChildren().setAll(showSignUpWindow);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.showAndWait();
     }
 
     private void showAddTasksWindow(){
         //take users to sign up screen
-        btn_login_login.getScene().getWindow().hide();//use the sign up button to get the active window then hide the active window to show sign up activity
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/view/addItem.fxml"));
         try {
-            loader.load();
-        } catch (IOException e) {
+            AnchorPane showAddTaskwindow = FXMLLoader
+                    .load(getClass().getResource("/sample/view/addItem.fxml"));
+
+            Fader fadeTaskAdditionForm = new Fader();
+            fadeTaskAdditionForm.appearFadeIn(showAddTaskwindow);
+
+            rootanchorpane_inlogin.getChildren().setAll(showAddTaskwindow);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.showAndWait();
     }
 
 }
