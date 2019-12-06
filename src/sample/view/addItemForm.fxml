@@ -3,22 +3,27 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2c2c2c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemFormController">
    <children>
-      <TextField fx:id="Tasktitle_additemform" layoutX="176.0" layoutY="131.0" prefHeight="45.0" prefWidth="349.0" promptText="Task Title">
+      <TextField fx:id="Tasktitle_additemform" layoutX="176.0" layoutY="178.0" prefHeight="45.0" prefWidth="349.0" promptText="Task Title">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="Taskdescription_additemform" layoutX="176.0" layoutY="215.0" prefHeight="45.0" prefWidth="349.0" promptText="Task Description">
+      <TextField fx:id="Taskdescription_additemform" layoutX="176.0" layoutY="253.0" prefHeight="45.0" prefWidth="349.0" promptText="Task Description">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="savetask_additemform" alignment="CENTER" layoutX="280.0" layoutY="289.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="141.0" style="-fx-background-color: #000;" text="Save Task" textFill="WHITE" />
+      <Button fx:id="savetask_additemform" alignment="CENTER" layoutX="280.0" layoutY="325.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="141.0" style="-fx-background-color: #000;" text="Save Task" textFill="WHITE">
+         <font>
+            <Font size="21.0" />
+         </font></Button>
       <AnchorPane prefHeight="92.0" prefWidth="700.0" style="-fx-background-color: #000;">
          <children>
             <Label alignment="CENTER" layoutX="280.0" layoutY="20.0" prefHeight="32.0" prefWidth="141.0" text="TO DO" textFill="WHITE">
@@ -26,7 +31,23 @@
                   <Font size="36.0" />
                </font>
             </Label>
+            <Button fx:id="myTasksbutton_inaddItemForm" layoutX="580.0" layoutY="20.0" mnemonicParsing="false" opacity="0.0" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #2c2c2c;" text="My Tasks: 0" textFill="WHITE" />
+            <Label fx:id="addAnotherTasklabel_inaddItemForm" alignment="CENTER" layoutX="230.0" layoutY="63.0" opacity="0.0" prefHeight="15.0" prefWidth="240.0" text="Add another Task" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
+      <Label fx:id="taskaddedsucessLabel_inaddItemform" alignment="CENTER" layoutX="282.0" layoutY="117.0" prefHeight="32.0" prefWidth="172.0" text="Task Added Successfully" textFill="WHITE" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="taskaddedsuccessimage_inaddItemForm" fitHeight="32.0" fitWidth="36.0" layoutX="247.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../assets/ic_taskaddedTick.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

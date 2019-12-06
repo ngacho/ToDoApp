@@ -19,8 +19,19 @@ public class Fader {
 
     }
 
+
     public void appearFadeIn(Node node){
         FadeTransition fadeInTransition = new FadeTransition(Duration.millis(1000), node);
+
+        fadeInTransition.setFromValue(0f);
+        fadeInTransition.setToValue(1f);
+        fadeInTransition.setCycleCount(1);
+        fadeInTransition.setAutoReverse(false);
+        fadeInTransition.play();
+    }
+
+    public void appearSlowly(Node node){
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(500), node);
 
         fadeInTransition.setFromValue(0f);
         fadeInTransition.setToValue(1f);

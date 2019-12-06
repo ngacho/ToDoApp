@@ -90,24 +90,29 @@ public class DatabaseHandler extends Configs{
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
-        /*String insert = "INSERT INTO "+Const.TASKS_TABLE+"(" +Const.TASKS_DATECREATED +","+Const.TASKS_DESCRIPTION+","
-                +Const.TASKS_TASK+")"
-                +"VALUES(?,?,?)";*/
-/*
+    public int getAllTasks(int userId){
+        int tasks = 0;
+        String taskQuery = "SELECT COUNT(*) FROM "
+                + Const.TASKS_TABLE
+                + " WHERE "
+                + Const.TASKS_USERID
+                + "=?";
+
         try {
-            PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(taskQuery);
+            preparedStatement.setInt(1, userId);
 
-//            preparedStatement.setInt(1, AddItemController.userId);
-            preparedStatement.setTimestamp(1, task.getDateCreated());
-            preparedStatement.setString(2, task.getDescription());
-            preparedStatement.setString(3, task.getTask());
 
-            preparedStatement.executeUpdate();
-            dbConnection.close();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                tasks = resultSet.getInt(1);
+            }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        }*/
+        }
 
+        return tasks;
     }
 }
