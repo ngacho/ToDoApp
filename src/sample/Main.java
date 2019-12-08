@@ -13,6 +13,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("view/login.fxml"));//TODO change the getResource method to "view/login.fxml"
         //Parent root = FXMLLoader.load(getClass().getResource("view/addItem.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("view/tasklist.fxml"));
         primaryStage.setTitle("To Do App");
         primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.setResizable(false);

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2c2c2c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemFormController">
+<AnchorPane fx:id="rootAnchorpane_inaddItemform" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2c2c2c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemFormController">
    <children>
       <TextField fx:id="Tasktitle_additemform" layoutX="176.0" layoutY="178.0" prefHeight="45.0" prefWidth="349.0" promptText="Task Title">
          <font>
@@ -31,7 +31,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <Button fx:id="myTasksbutton_inaddItemForm" layoutX="580.0" layoutY="20.0" mnemonicParsing="false" opacity="0.0" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #2c2c2c;" text="My Tasks: 0" textFill="WHITE" />
+            <Button fx:id="myTasksbutton_inaddItemForm" layoutX="580.0" layoutY="20.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #2c2c2c;" text="My Tasks" textFill="WHITE" />
             <Label fx:id="addAnotherTasklabel_inaddItemForm" alignment="CENTER" layoutX="230.0" layoutY="63.0" opacity="0.0" prefHeight="15.0" prefWidth="240.0" text="Add another Task" textFill="WHITE">
                <font>
                   <Font size="14.0" />

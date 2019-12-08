@@ -1,10 +1,12 @@
 package sample.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import sample.animations.Fader;
 import sample.database.DatabaseHandler;
 import sample.models.Task;
@@ -16,6 +18,7 @@ import java.util.ResourceBundle;
 public class AddItemFormController {
 
     private int userId;
+    int taskNumber;
 
     private DatabaseHandler databaseHandler;
     @FXML
@@ -23,6 +26,9 @@ public class AddItemFormController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private AnchorPane rootAnchorpane_inaddItemform;
 
     @FXML
     private TextField Tasktitle_additemform;
@@ -51,7 +57,10 @@ public class AddItemFormController {
     @FXML
     void initialize() {
         databaseHandler = new DatabaseHandler();
+        setNoTasks();
+        //if(taskNumber>0) openTaskList();
         savetask_additemform.setOnAction(actionEvent -> saveTasktoDatabase());
+        myTasksbutton_inaddItemForm.setOnAction(actionEvent -> openTaskList());
     }
 
     private void saveTasktoDatabase() {
@@ -71,7 +80,8 @@ public class AddItemFormController {
 
             try {
                 databaseHandler.insertTask(task);
-                showLabelandButton();
+                showLabelandclearTextViews();
+                setNoTasks();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -83,7 +93,7 @@ public class AddItemFormController {
 
     }
 
-    private void showLabelandButton(){
+    private void showLabelandclearTextViews(){
         taskaddedsuccessimage_inaddItemForm.setVisible(true);
         taskaddedsucessLabel_inaddItemform.setVisible(true);
 
@@ -94,10 +104,33 @@ public class AddItemFormController {
         Tasktitle_additemform.clear();
         Taskdescription_additemform.clear();
 
-        int taskNumber = databaseHandler.getAllTasks(AddItemController.userId);
+
+    }
+
+    public void setNoTasks(){
+        taskNumber = databaseHandler.getAllTasks(AddItemController.userId);
 
         myTasksbutton_inaddItemForm.setText("My Tasks: " + taskNumber);
-        labelandButtonFader.appearSlowly(addAnotherTasklabel_inaddItemForm);
-        labelandButtonFader.appearFadeIn(myTasksbutton_inaddItemForm);
     }
+
+    public int getNoTasks(){
+
+        return taskNumber;
+    }
+
+    public void openTaskList(){
+        try {
+            AnchorPane tasksList = FXMLLoader
+                    .load(getClass().getResource("/sample/view/tasklist.fxml"));
+
+            Fader fadeTaskAdditionForm = new Fader();
+            fadeTaskAdditionForm.appearFadeIn(tasksList);
+
+            rootAnchorpane_inaddItemform.getChildren().setAll(tasksList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

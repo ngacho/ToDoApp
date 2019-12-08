@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootanchorpane_inlistrow" prefHeight="91.0" prefWidth="680.0" style="-fx-background-color: #2c2c2c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ListRowController">
+   <children>
+      <ImageView fitHeight="57.0" fitWidth="57.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/ic_tasks.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="tasknamelabel_inlistrow" layoutX="71.0" layoutY="12.0" prefHeight="27.0" prefWidth="261.0" text="Task Name" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="taskdescription_inlistrow" layoutX="71.0" layoutY="41.0" prefHeight="27.0" prefWidth="603.0" text="Task Description" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="datecreatedlabel_inlistrow" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="69.0" prefHeight="17.0" prefWidth="124.0" text="Date Created" textFill="WHITE" />
+      <ImageView fx:id="deleteimage_inlistrow" fitHeight="33.0" fitWidth="39.0" layoutX="635.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/ic_delete.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
