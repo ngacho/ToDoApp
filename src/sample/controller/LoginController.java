@@ -57,28 +57,34 @@ public class LoginController {
         String logInPassword = passfield_login_password.getText().trim();
         User user = new User(logInUserName, logInPassword);
 
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        ResultSet userRow = databaseHandler.getUser(user);
-        try {
-            int counter = 0;
-            while (userRow.next()){
-                userId = userRow.getInt("userid");
-                System.out.println(userId);
-                counter++;
-            }
+        if (!logInUserName.equals("") && !logInPassword.equals("")) {
+            DatabaseHandler databaseHandler = new DatabaseHandler();
+            ResultSet userRow = databaseHandler.getUser(user);
+            try {
+                int counter = 0;
+                while (userRow.next()) {
+                    userId = userRow.getInt("userid");
+                    System.out.println(userId);
+                    counter++;
+                }
 
-            if(counter == 1){
-                System.out.println("Log In successful!");
-                showAddTasksWindow();
-            }else{
-                Shaker shaker = new Shaker(txtfield_login_username, passfield_login_password);
-                shaker.shakeBoth();
-                txtfield_login_username.clear();
-                passfield_login_password.clear();
+                if (counter == 1) {
+                    System.out.println("Log In successful!");
+                    showAddTasksWindow();
+                } else {
+                    Shaker shaker = new Shaker(txtfield_login_username, passfield_login_password);
+                    shaker.shakeBoth();
+                    txtfield_login_username.clear();
+                    passfield_login_password.clear();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }}
+        }
+        else{
+            System.out.println("Please enter your credentials");
+        }
+    }
 
     private void openSignUpWindow() {
         //take users to sign up screen

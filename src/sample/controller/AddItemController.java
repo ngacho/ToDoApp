@@ -37,27 +37,10 @@ public class AddItemController {
     void initialize() {
 
         addTask_inaddItem.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            Shaker addTaskShaker = new Shaker(addTask_inaddItem);
-            addTaskShaker.shake();
-            System.out.println("Added Task...");
-            makeItemsFade();
+            System.out.println("New task added");
+            showTaskAdditionForm();
         });
 
-
-    }
-
-    private void makeItemsFade() {
-        //Relocate Items to corner
-        addTask_inaddItem.relocate(0, 0);
-        noTaskLabel_inaddItem.relocate(0, 10);
-        //Add Transition to add button
-        Fader fadeAddTaskButton = new Fader();
-        fadeAddTaskButton.disappearFadeOut(addTask_inaddItem);
-        //Add Transition to no-task-label
-        Fader fadeNoTaskLabel =  new Fader();
-        fadeNoTaskLabel.disappearFadeOut(noTaskLabel_inaddItem);
-
-        showTaskAdditionForm();
 
     }
 
