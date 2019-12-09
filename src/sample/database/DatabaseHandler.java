@@ -1,16 +1,14 @@
 package sample.database;
 
-import sample.controller.AddItemController;
 import sample.models.Task;
 import sample.models.User;
 
-import javax.xml.transform.Result;
 import java.sql.*;
-import java.util.concurrent.CompletionService;
 
-public class DatabaseHandler extends Configs{
+public class DatabaseHandler extends Configs {
     Connection dbConnection;
-    public  Connection getDbConnection() throws ClassNotFoundException, SQLException{
+
+    public Connection getDbConnection() throws ClassNotFoundException, SQLException {
         String connectionString = "jdbc:mysql://"
                 + dbHost + ":"
                 + dbPort + "/"
@@ -25,10 +23,10 @@ public class DatabaseHandler extends Configs{
 
     public void signUpUser(User user) {
 
-        String insert = "INSERT INTO "+Const.USERS_TABLE+"("+Const.USERS_FIRSTNAME
-                +","+Const.USERS_LASTNAME+","+Const.USERS_USERNAME+","
-                +Const.USERS_PASSWORD+","+Const.USERS_GENDER+")"
-                +"VALUES(?,?,?,?,?)";
+        String insert = "INSERT INTO " + Const.USERS_TABLE + "(" + Const.USERS_FIRSTNAME
+                + "," + Const.USERS_LASTNAME + "," + Const.USERS_USERNAME + ","
+                + Const.USERS_PASSWORD + "," + Const.USERS_GENDER + ")"
+                + "VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
@@ -45,7 +43,7 @@ public class DatabaseHandler extends Configs{
         }
     }
 
-    public ResultSet getUser(User user){
+    public ResultSet getUser(User user) {
         ResultSet resultSet = null;
         if (!user.getUserName().equals("") || !user.getLastName().equals("")) {
             //select all from users table where username="username" and password ="password"
@@ -73,12 +71,12 @@ public class DatabaseHandler extends Configs{
         return resultSet;
     }
 
-    public void insertTask(Task task){
-        String query = "INSERT INTO "+Const.TASKS_TABLE+"("+Const.TASKS_USERID+","+Const.TASKS_DATECREATED
-                +","+Const.TASKS_DESCRIPTION+","+Const.TASKS_TASK+")"
-                +"VALUES(?,?,?,?)";
+    public void insertTask(Task task) {
+        String query = "INSERT INTO " + Const.TASKS_TABLE + "(" + Const.TASKS_USERID + "," + Const.TASKS_DATECREATED
+                + "," + Const.TASKS_DESCRIPTION + "," + Const.TASKS_TASK + ")"
+                + "VALUES(?,?,?,?)";
 
-        try{
+        try {
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
 
             preparedStatement.setInt(1, task.getUserId());
@@ -87,12 +85,35 @@ public class DatabaseHandler extends Configs{
             preparedStatement.setString(4, task.getTask());
 
             preparedStatement.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public int getAllTasks(int userId){
+    public ResultSet getTasksbyUserId(int userId) {
+        ResultSet tasksResultSet = null;
+
+        String taskQuery = "SELECT * FROM "
+                + Const.TASKS_TABLE
+                + " WHERE "
+                + Const.TASKS_USERID
+                + "=?";
+
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(taskQuery);
+            preparedStatement.setInt(1, userId);
+
+            tasksResultSet = preparedStatement.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return tasksResultSet;
+    }
+
+    public int getAllTasks(int userId) {
         int tasks = 0;
         String taskQuery = "SELECT COUNT(*) FROM "
                 + Const.TASKS_TABLE

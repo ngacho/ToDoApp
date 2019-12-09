@@ -12,6 +12,8 @@ import sample.database.DatabaseHandler;
 import sample.models.Task;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
@@ -119,6 +121,9 @@ public class AddItemFormController {
     }
 
     public void openTaskList(){
+
+
+
         try {
             AnchorPane tasksList = FXMLLoader
                     .load(getClass().getResource("/sample/view/tasklist.fxml"));

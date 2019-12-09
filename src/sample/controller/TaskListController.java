@@ -8,14 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import sample.animations.Fader;
+import sample.database.DatabaseHandler;
 import sample.models.Task;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-public class ListController {
+public class TaskListController {
 
     private int userId;
 
@@ -40,15 +42,31 @@ public class ListController {
 
     @FXML
     void initialize() {
-        addtaskbutton_inlist.setOnAction(actionEvent -> openAddTaskForm());
-
-        Task testTask = new Task(Timestamp.valueOf(LocalDateTime.now()), "Test Task", "We are testing to see if task is working");
+        //Setting the userid
+        setUserId(AddItemController.userId);
 
         tasks = FXCollections.observableArrayList();
-        tasks.add(testTask);
+
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        ResultSet tasksResultSet = databaseHandler.getTasksbyUserId(userId);
+        try {
+            while (tasksResultSet.next()) {
+                Timestamp taskDateCreated = tasksResultSet.getTimestamp("datecreated");
+                String taskName = tasksResultSet.getString("task");
+                String taskDescription = tasksResultSet.getString("description");
+                Task task = new Task(taskDateCreated, taskName, taskDescription);
+                tasks.add(task);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         taskListViw_inlist.setItems(tasks);
         taskListViw_inlist.setCellFactory(ListRowController -> new ListRowController());
+
+        addtaskbutton_inlist.setOnAction(actionEvent -> openAddTaskForm());
+
+
 
     }
 
