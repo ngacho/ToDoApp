@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -18,7 +19,10 @@
             <Button fx:id="addtaskbutton_inlist" alignment="CENTER" layoutX="561.0" layoutY="34.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #2c2c2d;" text="Add Task" textFill="WHITE" />
          </children>
       </AnchorPane>
-      <ListView fx:id="taskListViw_inlist" layoutX="10.0" layoutY="136.0" prefHeight="250.0" prefWidth="680.0" style="-fx-background-color: #626262;" />
+      <ListView fx:id="taskListViw_inlist" layoutX="10.0" layoutY="136.0" prefHeight="250.0" prefWidth="680.0" style="-fx-background-color: #626262;">
+         <effect>
+            <DropShadow />
+         </effect></ListView>
       <Label alignment="CENTER" layoutX="297.0" layoutY="109.0" prefHeight="25.0" prefWidth="107.0" text="My Tasks" textFill="WHITE">
          <font>
             <Font size="18.0" />

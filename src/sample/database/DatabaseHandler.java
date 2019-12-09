@@ -136,4 +136,24 @@ public class DatabaseHandler extends Configs {
 
         return tasks;
     }
+
+    public void deleteTask(int userId, int taskId) {
+
+        String deleteTaskQuery = "DELETE FROM "
+                + Const.TASKS_TABLE
+                + " WHERE "
+                + Const.TASKS_USERID
+                + "=?" + " AND " +Const.TASKS_TASKID + "=?";
+
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(deleteTaskQuery);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, taskId);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

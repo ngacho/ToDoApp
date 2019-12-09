@@ -1,13 +1,16 @@
 package sample.controller;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import sample.database.DatabaseHandler;
 import sample.models.Task;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class ListRowController extends ListCell<Task> {
@@ -31,11 +34,13 @@ public class ListRowController extends ListCell<Task> {
     private ImageView deleteimage_inlistrow;
 
     private FXMLLoader listRowFXMLloader;
+    private DatabaseHandler databaseHandler = new DatabaseHandler();
 
     @FXML
     void initialize() {
 
     }
+
 
     @Override
     protected void updateItem(Task myTask, boolean empty) {
@@ -60,6 +65,11 @@ public class ListRowController extends ListCell<Task> {
             tasknamelabel_inlistrow.setText(myTask.getTask());
             taskdescription_inlistrow.setText(myTask.getDescription());
             datecreatedlabel_inlistrow.setText(myTask.getDateCreated().toString());
+
+            deleteimage_inlistrow.setOnMouseClicked(mouseEvent -> {
+                getListView().getItems().remove(getItem());
+                databaseHandler.deleteTask(AddItemController.userId, myTask.getTaskId());
+            });
 
             setText(null);
             setGraphic(rootanchorpane_inlistrow);

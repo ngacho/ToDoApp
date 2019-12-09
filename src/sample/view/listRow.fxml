@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,8 +23,11 @@
          <font>
             <Font size="14.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
-      <Label fx:id="datecreatedlabel_inlistrow" alignment="CENTER_RIGHT" layoutX="370.0" layoutY="69.0" prefHeight="17.0" prefWidth="250.0" text="Date Created" textFill="WHITE" />
+      <Label fx:id="datecreatedlabel_inlistrow" alignment="CENTER" layoutX="370.0" layoutY="69.0" prefHeight="17.0" prefWidth="250.0" text="Date Created" textFill="WHITE" />
       <ImageView fx:id="deleteimage_inlistrow" fitHeight="33.0" fitWidth="39.0" layoutX="587.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/ic_delete.png" />

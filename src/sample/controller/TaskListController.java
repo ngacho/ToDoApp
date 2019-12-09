@@ -55,6 +55,7 @@ public class TaskListController {
                 String taskName = tasksResultSet.getString("task");
                 String taskDescription = tasksResultSet.getString("description");
                 Task task = new Task(taskDateCreated, taskName, taskDescription);
+                task.setTaskId(tasksResultSet.getInt("taskId"));
                 tasks.add(task);
             }
         } catch (SQLException e) {
