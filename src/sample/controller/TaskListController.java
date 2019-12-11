@@ -11,25 +11,17 @@ import sample.animations.Fader;
 import sample.database.DatabaseHandler;
 import sample.models.Task;
 
-import java.net.URL;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ResourceBundle;
 
 public class TaskListController {
 
     private int userId;
 
-
-    @FXML
-    private ResourceBundle resources;
-
     @FXML
     private AnchorPane rootanchor_inList;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button addtaskbutton_inlist;
@@ -37,15 +29,13 @@ public class TaskListController {
     @FXML
     private ListView<Task> taskListViw_inlist;
 
-    private ObservableList<Task> tasks;
-
 
     @FXML
     void initialize() {
         //Setting the userid
         setUserId(AddItemController.userId);
 
-        tasks = FXCollections.observableArrayList();
+        ObservableList<Task> tasks = FXCollections.observableArrayList();
 
         DatabaseHandler databaseHandler = new DatabaseHandler();
         ResultSet tasksResultSet = databaseHandler.getTasksbyUserId(userId);
@@ -68,7 +58,6 @@ public class TaskListController {
         addtaskbutton_inlist.setOnAction(actionEvent -> openAddTaskForm());
 
 
-
     }
 
     private void openAddTaskForm() {
@@ -85,11 +74,7 @@ public class TaskListController {
         }
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
+    private void setUserId(int userId) {
         this.userId = userId;
     }
 

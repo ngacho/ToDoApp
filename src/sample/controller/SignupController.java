@@ -105,5 +105,8 @@ public class SignupController {
             e.printStackTrace();
         }
 
+
+        openLogInWindow();
+
     }
 }

@@ -14,7 +14,6 @@ import sample.animations.Shaker;
 import sample.database.DatabaseHandler;
 import sample.models.User;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,8 +79,7 @@ public class LoginController {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-        else{
+        } else {
             System.out.println("Please enter your credentials");
         }
     }
@@ -101,7 +99,7 @@ public class LoginController {
         }
     }
 
-    private void showAddTasksWindow(){
+    private void showAddTasksWindow() {
         //take users to sign up screen
         btn_login_login.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();
@@ -117,6 +115,7 @@ public class LoginController {
         Parent root = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
 
         AddItemController addItemController = loader.getController();
         addItemController.setUserId(userId);
@@ -124,7 +123,5 @@ public class LoginController {
 
         stage.showAndWait();
     }
-
-
 
 }
